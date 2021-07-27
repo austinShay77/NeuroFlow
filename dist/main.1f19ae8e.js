@@ -954,12 +954,13 @@ function _readAlbums() {
         switch (_context.prev = _context.next) {
           case 0:
             _context.next = 2;
-            return (0, _mock_api.mockFetchHelper)(raw_albums);
+            return (0, _mock_api.mockFetchHelper)(true, raw_albums);
 
           case 2:
             table = _context.sent;
+            createTable(table);
 
-          case 3:
+          case 4:
           case "end":
             return _context.stop();
         }
@@ -970,7 +971,6 @@ function _readAlbums() {
 }
 
 function createTable(data) {
-  readAlbums();
   var table = document.getElementById('album-table');
   var count = Object.keys(data.albums).length;
   data.albums.sort(function (a, b) {
@@ -979,8 +979,6 @@ function createTable(data) {
 
   for (var i = 0; i < count; i++) {
     var date = new Date(data.albums[i].last_listened);
-    console.log(date);
-    console.log(date.getHours());
     var row = "<tr>\n                        <td>".concat(data.albums[i].band_name, "</td>\n                        <td>").concat(data.albums[i].album_title, "</td>\n                        <td>").concat(data.albums[i].genres, "</td>\n                        <td>").concat((date.getMonth() + 1 < 10 ? '0' + (date.getMonth() + 1) : date.getMonth() + 1) + "/" + (date.getDate() < 10 ? '0' + date.getDate() : date.getDate()) + "/" + date.getFullYear() + " " + (date.getHours() < 10 ? '0' + date.getHours() : date.getHours()) + ":" + (date.getMinutes() < 10 ? '0' + date.getMinutes() : date.getMinutes()) + " am", "\n                        </td>\n                        <td>").concat(reverseDate(data.albums[i].release_date), "</td>\n                    </tr>");
     table.innerHTML += row;
   }
@@ -992,7 +990,7 @@ function reverseDate(date) {
   return reverse;
 }
 
-createTable(raw_albums);
+readAlbums();
 },{"./mock_api":"mock_api.js","./albums.json":"albums.json","regenerator-runtime/runtime":"node_modules/regenerator-runtime/runtime.js"}],"node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
 var global = arguments[3];
 var OVERLAY_ID = '__parcel__error__overlay__';
@@ -1021,7 +1019,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "59285" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "60471" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};

@@ -3,11 +3,11 @@ const raw_albums = require('./albums.json');
 import 'regenerator-runtime/runtime'
 
 async function readAlbums() {
-    const table = await mockFetchHelper(raw_albums);
+    const table = await mockFetchHelper(true, raw_albums);
+    createTable(table)
 }
 
 function createTable(data) {
-    readAlbums()
     let table = document.getElementById('album-table')
     let count = Object.keys(data.albums).length
 
@@ -15,8 +15,6 @@ function createTable(data) {
 
     for (let i=0; i<count; i++){
         let date = new Date(data.albums[i].last_listened)
-        console.log(date)
-        console.log(date.getHours())
 
         let row = `<tr>
                         <td>${data.albums[i].band_name}</td>
@@ -41,4 +39,4 @@ function reverseDate(date) {
     return reverse
 }
 
-createTable(raw_albums)
+readAlbums()
